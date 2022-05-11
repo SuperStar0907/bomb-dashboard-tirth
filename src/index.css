@@ -177,6 +177,48 @@ code {
   overflow: hidden;
 }
 
+/* Dropdown menus implementation */
+.navDropdownMenuRoot:after{
+  content: '';
+  border: 4px solid transparent;
+  border-top: 4px solid white;
+  margin-left: 5px;
+  margin-bottom: 3px;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.navDropdownMenu .navDropdownMenuContainer {
+  display: none;
+  padding-top: 10px;
+  position: absolute;
+  left: 0;
+  top: 20px;
+}
+
+.navDropdownMenu:hover .navDropdownMenuContainer {
+  display: block;
+}
+
+.navDropdownMenu .navDropdownMenuWrapper {
+  background-color: #000;
+  border: 1px solid rgb(255, 215, 2);
+  border-bottom: none;
+  animation: growDown 300ms ease-in-out forwards;
+}
+
+.navDropdownMenu .navDropdownMenuItem {
+  border-bottom: 1px solid rgb(255, 215, 2);
+}
+
+.navDropdownMenu .navDropdownMenuItem a {
+  display: block;
+  padding-bottom: 5px;
+  padding-right: 10px;
+}
+
+/* End dropdown menus implementation */
+
 .bomb {
   background-image: url('/bomb1.png');
 }

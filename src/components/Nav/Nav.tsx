@@ -127,15 +127,38 @@ const Nav = () => {
               <Link to="/" className={'navLink ' + classes.link}>
                 Home
               </Link>
-              <Link to="/farm" className={'navLink ' + classes.link}>
-                Farm
-              </Link>
-              <Link to="/boardroom" className={'navLink ' + classes.link}>
-                Boardroom
-              </Link>
-              <Link to="/xbomb" className={'navLink ' + classes.link}>
-                xBOMB
-              </Link>
+              <div className={'navDropdownMenu'} style={{"display": "inline", "position": "relative"}}>
+                <span className={'navDropdownMenuRoot navLink ' + classes.link}>Earn</span>
+                <div className={'navDropdownMenuContainer'}>
+                  <ul className={'navDropdownMenuWrapper'}>
+                    <li className={'navDropdownMenuItem'}>
+                      <Link to="/farm" className={'navLink ' + classes.link}>
+                        Farm
+                      </Link>
+                    </li>
+                    <li className={'navDropdownMenuItem'}>
+                      <Link to="/xbomb" className={'navLink ' + classes.link}>
+                        xBOMB
+                      </Link>
+                    </li>
+                    <li className={'navDropdownMenuItem'}>
+                      <Link to="/boardroom" className={'navLink ' + classes.link}>
+                        Boardroom
+                      </Link>
+                    </li>
+                    <li className={'navDropdownMenuItem'}>
+                      <a
+                          href="https://bomb.farm"
+                          className={'navLink ' + classes.link}
+                          rel="noopener noreferrer"
+                          //  target="_blank"
+                      >
+                        Vaults
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
               <Link to="/bond" className={'navLink ' + classes.link}>
                 Bond
               </Link>
@@ -161,15 +184,6 @@ const Nav = () => {
               //  target="_blank"
               >
                 BTC Staking
-              </a>
-    
-              <a
-                href="https://bomb.farm"
-                className={'navLink ' + classes.link}
-                rel="noopener noreferrer"
-              //  target="_blank"
-              >
-                Vaults
               </a>
                           <a
                 href="https://shop.bomb.money"
