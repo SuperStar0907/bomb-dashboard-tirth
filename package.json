@@ -53,6 +53,9 @@
     "use-wallet": "OGBoogieTomb/use-wallet",
     "web3": "^1.2.11"
   },
+  "resolutions": {
+    "@web3-react/walletconnect-connector": "6.2.8"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "CI= GENERATE_SOURCEMAP=false react-scripts build",
