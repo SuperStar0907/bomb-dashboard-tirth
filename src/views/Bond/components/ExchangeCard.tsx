@@ -17,6 +17,8 @@ import ERC20 from '../../../bomb-finance/ERC20';
 import useTokenBalance from '../../../hooks/useTokenBalance';
 import useApprove, {ApprovalState} from '../../../hooks/useApprove';
 import useCatchError from '../../../hooks/useCatchError';
+import { useWallet } from "use-wallet";
+import UnlockWallet from '../../../components/UnlockWallet';
 
 interface ExchangeCardProps {
   action: string;
@@ -47,6 +49,7 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
   } = useBombFinance();
   const [approveStatus, approve] = useApprove(fromToken, Treasury.address);
 
+  const {account} = useWallet();
   const balance = useTokenBalance(fromToken);
   const [onPresent, onDismiss] = useModal(
     <ExchangeModal
@@ -85,22 +88,28 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
           </StyledExchanger>
           <StyledDesc>{priceDesc}</StyledDesc>
           <StyledCardActions>
-            {approveStatus !== ApprovalState.APPROVED && !disabled ? (
-              <Button
-                className="shinyButton"
-                disabled={approveStatus === ApprovalState.PENDING || approveStatus === ApprovalState.UNKNOWN}
-                onClick={() => catchError(approve(), `Unable to approve ${fromTokenName}`)}
-              >
-                {`Approve ${fromTokenName}`}
-              </Button>
+            {!!account ? (
+              <>
+              {approveStatus !== ApprovalState.APPROVED && !disabled ? (
+                <Button
+                  className="shinyButton"
+                  disabled={approveStatus === ApprovalState.PENDING || approveStatus === ApprovalState.UNKNOWN}
+                  onClick={() => catchError(approve(), `Unable to approve ${fromTokenName}`)}
+                >
+                  {`Approve ${fromTokenName}`}
+                </Button>
+              ) : (
+                <Button
+                  className={disabled ? 'shinyButtonDisabled' : 'shinyButton'}
+                  onClick={onPresent}
+                  disabled={disabled}
+                >
+                  {disabledDescription || action}
+                </Button>
+              )}
+              </>
             ) : (
-              <Button
-                className={disabled ? 'shinyButtonDisabled' : 'shinyButton'}
-                onClick={onPresent}
-                disabled={disabled}
-              >
-                {disabledDescription || action}
-              </Button>
+              <UnlockWallet />
             )}
           </StyledCardActions>
         </StyledCardContentInner>

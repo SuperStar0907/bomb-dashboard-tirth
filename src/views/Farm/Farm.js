@@ -1,5 +1,4 @@
 import React from 'react';
-import { useWallet } from 'use-wallet';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import Bank from '../Bank';
 
@@ -7,7 +6,6 @@ import { Box, Container, Typography, Grid } from '@material-ui/core';
 
 import { Alert } from '@material-ui/lab';
 
-import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
 import FarmCard from './FarmCard';
 //import FarmImage from '../../assets/img/farm.png';
@@ -30,7 +28,6 @@ const TITLE = 'bomb.money | Farms';
 const Farm = () => {
   const [banks] = useBanks();
   const { path } = useRouteMatch();
-  const { account } = useWallet();
   const activeBanks = banks.filter((bank) => !bank.finished);
   return (
     <Switch>
@@ -40,7 +37,6 @@ const Farm = () => {
           <Helmet>
             <title>{TITLE}</title>
           </Helmet>
-          {!!account ? (
             <Container maxWidth="lg">
               <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
                 Reward Farms
@@ -127,9 +123,6 @@ const Farm = () => {
                 </div>
               </Box>
             </Container>
-          ) : (
-            <UnlockWallet />
-          )}
         </Route>
         <Route path={`${path}/:bankId`}>
           <BackgroundImage />
