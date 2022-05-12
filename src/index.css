@@ -190,10 +190,12 @@ code {
 
 .navDropdownMenu .navDropdownMenuContainer {
   display: none;
-  padding-top: 10px;
+  padding-top: 24px;
   position: absolute;
   left: 0;
   top: 20px;
+  animation: rotateMenu 400ms ease-in-out forwards;
+  transform-origin: top center;
 }
 
 .navDropdownMenu:hover .navDropdownMenuContainer {
@@ -201,20 +203,36 @@ code {
 }
 
 .navDropdownMenu .navDropdownMenuWrapper {
-  background-color: #000;
-  border: 1px solid rgb(255, 215, 2);
+  background-color: #171923;
+  border: 1px solid #171923;
   border-bottom: none;
-  animation: growDown 300ms ease-in-out forwards;
 }
 
 .navDropdownMenu .navDropdownMenuItem {
   border-bottom: 1px solid rgb(255, 215, 2);
 }
 
+.navDropdownMenu .navDropdownMenuItem:last-of-type {
+  border-bottom: 1px solid #171923;
+}
+
 .navDropdownMenu .navDropdownMenuItem a {
   display: block;
   padding-bottom: 5px;
   padding-right: 10px;
+  font-size: 15px;
+}
+
+@keyframes rotateMenu {
+  0% {
+    transform: rotateX(-90deg)
+  }
+  70% {
+    transform: rotateX(20deg)
+  }
+  100% {
+    transform: rotateX(0deg)
+  }
 }
 
 /* End dropdown menus implementation */
