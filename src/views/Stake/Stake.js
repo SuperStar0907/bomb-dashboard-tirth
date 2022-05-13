@@ -69,8 +69,6 @@ const Staking = () => {
       <Helmet>
         <title>{TITLE}</title>
       </Helmet>
-      {!!account ? (
-        <>
           <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
             BOMB Staking for xBOMB
           </Typography>
@@ -139,6 +137,7 @@ const Staking = () => {
                   </CardContent>
                 </Card>
               </Grid>
+              {!!account && (
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
@@ -147,6 +146,7 @@ const Staking = () => {
                   </CardContent>
                 </Card>
               </Grid>
+              )}
             </Grid>
 
             <Box mt={4}>
@@ -158,7 +158,11 @@ const Staking = () => {
                   {/* <Spacer /> */}
 
                   <StyledCardWrapper>
-                    <Stake />
+                    {!!account ? (
+                      <Stake />
+                    ) : (
+                        <UnlockWallet />
+                    )}
                   </StyledCardWrapper>
                 </StyledCardsWrapper>
               </StyledBoardroom>
@@ -240,10 +244,6 @@ const Staking = () => {
               </Button>
             </Grid>
           </Box> */}
-        </>
-      ) : (
-        <UnlockWallet />
-      )}
     </Page>
   );
 };

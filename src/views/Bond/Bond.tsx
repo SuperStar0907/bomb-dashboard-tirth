@@ -2,8 +2,6 @@ import React, {useCallback, useMemo} from 'react';
 import Page from '../../components/Page';
 import {createGlobalStyle} from 'styled-components';
 import {Route, Switch, useRouteMatch} from 'react-router-dom';
-import {useWallet} from 'use-wallet';
-import UnlockWallet from '../../components/UnlockWallet';
 import PageHeader from '../../components/PageHeader';
 import ExchangeCard from './components/ExchangeCard';
 import styled from 'styled-components';
@@ -36,7 +34,6 @@ const TITLE = 'bomb.money | Bonds'
 
 const Bond: React.FC = () => {
   const {path} = useRouteMatch();
-  const {account} = useWallet();
   const bombFinance = useBombFinance();
   const addTransaction = useTransactionAdder();
   const bondStat = useBondStats();
@@ -78,8 +75,6 @@ const Bond: React.FC = () => {
               <Helmet>
         <title>{TITLE}</title>
       </Helmet>
-        {!!account ? (
-          <>
             <Route exact path={path}>
               <PageHeader icon={'💣'} title="Buy &amp; Redeem Bonds" subtitle="Earn premiums upon redemption" />
             </Route>
@@ -143,10 +138,6 @@ const Bond: React.FC = () => {
                 />
               </StyledCardWrapper>
             </StyledBond>
-          </>
-        ) : (
-          <UnlockWallet />
-        )}
       </Page>
     </Switch>
   );

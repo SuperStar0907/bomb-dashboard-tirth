@@ -68,8 +68,6 @@ const Boardroom = () => {
       <Helmet>
         <title>{TITLE}</title>
       </Helmet>
-      {!!account ? (
-        <>
           <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
             Boardroom
           </Typography>
@@ -135,6 +133,7 @@ const Boardroom = () => {
               </Box>
             </Grid>
 
+        {!!account ? (
             <Box mt={4}>
               <StyledBoardroom>
                 <StyledCardsWrapper>
@@ -148,6 +147,9 @@ const Boardroom = () => {
                 </StyledCardsWrapper>
               </StyledBoardroom>
             </Box>
+        ) : (
+            <UnlockWallet />
+        )}
 
             {/* <Grid container justify="center" spacing={3}>
             <Grid item xs={4}>
@@ -180,6 +182,7 @@ const Boardroom = () => {
           </Grid> */}
           </Box>
 
+        {!!account && (
           <Box mt={5}>
             <Grid container justify="center" spacing={3} mt={10}>
               <Button
@@ -195,10 +198,7 @@ const Boardroom = () => {
               </Button>
             </Grid>
           </Box>
-        </>
-      ) : (
-        <UnlockWallet />
-      )}
+        )}
     </Page>
   );
 };
