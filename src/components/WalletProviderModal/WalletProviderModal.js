@@ -6,6 +6,8 @@ import metamaskLogo from '../../assets/img/metamask-fox.svg';
 import walletConnectLogo from '../../assets/img/wallet-connect.svg';
 import coingBaseLogo from '../../assets/img/coinbase_logo.jpeg';
 import { useWallet } from 'use-wallet';
+import config from '../../config';
+import { connectToNetwork } from '../../hooks/useNetworkPrompt';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -21,7 +23,10 @@ const useStyles = makeStyles((theme) => ({
 
 const WalletProviderModal = ({ open, handleClose }) => {
   const classes = useStyles();
+
   const { account, connect, error } = useWallet();
+  const {ethereum} = window;
+
 
   useEffect(() => {
     if (account) {
@@ -43,21 +48,24 @@ const WalletProviderModal = ({ open, handleClose }) => {
         <List component="nav" aria-label="main mailbox folders">
           <WalletCard
             icon={<img src={metamaskLogo} alt="Metamask logo" style={{ height: 32 }} />}
-            onConnect={() => {
+            onConnect={async () => {
+              if (ethereum && ethereum.networkVersion !== config.chainId.toString()) {
+                await connectToNetwork(ethereum);
+              }
               connect('injected');
             }}
             title="Metamask"
           />
           <WalletCard
             icon={<img src={walletConnectLogo} alt="Wallet Connect logo" style={{ height: 24, color: 'white' }} />}
-            onConnect={() => {
+            onConnect={async () => {
               connect('walletconnect');
             }}
             title="WalletConnect"
           />
           <WalletCard
             icon={<img src={coingBaseLogo} alt="Coinbase wallet logo" style={{ height: 32, color: 'white' }} />}
-            onConnect={() => {
+            onConnect={async () => {
               connect('walletlink');
             }}
             title="Coinbase Wallet"

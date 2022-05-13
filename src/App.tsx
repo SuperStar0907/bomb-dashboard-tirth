@@ -15,6 +15,7 @@ import config from './config';
 import Updaters from './state/Updaters';
 import Loader from './components/Loader';
 import Popups from './components/Popups';
+import useChainId from './hooks/useChainId';
 //import Regulations from './views/Regulations/Regulations';
 import {RefreshContextProvider} from './contexts/RefreshContext';
 
@@ -85,11 +86,17 @@ const App: React.FC = () => {
   );
 };
 
+const UseWalletProviderWrapper = (props: any) => {
+  const chainId = useChainId();
+
+  return <UseWalletProvider chainId={chainId} {...props}></UseWalletProvider>;
+}
+
 const Providers: React.FC = ({children}) => {
   return (
     <TP1 theme={theme}>
       <TP theme={newTheme}>
-        <UseWalletProvider
+        <UseWalletProviderWrapper
                     chainId={config.chainId}
 
           connectors={{
@@ -116,7 +123,7 @@ const Providers: React.FC = ({children}) => {
               </BombFinanceProvider>
             </RefreshContextProvider>
           </Provider>
-        </UseWalletProvider>
+        </UseWalletProviderWrapper>
       </TP>
     </TP1>
   );
