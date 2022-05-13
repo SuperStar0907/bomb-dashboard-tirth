@@ -17,9 +17,7 @@ const useTotalStakedOnBoardroom = () => {
         console.error(err);
       }
     }
-    if (isUnlocked) {
-      fetchTotalStaked();
-    }
+    fetchTotalStaked();
   }, [isUnlocked, slowRefresh, bombFinance]);
 
   return totalStaked;

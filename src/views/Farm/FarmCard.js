@@ -3,8 +3,12 @@ import { Link } from 'react-router-dom';
 import { Box, Button, Card, CardActions, CardContent, Typography, Grid } from '@material-ui/core';
 
 import TokenSymbol from '../../components/TokenSymbol';
+import { useWallet } from 'use-wallet';
+import UnlockWallet from '../../components/UnlockWallet';
 
 const FarmCard = ({ bank }) => {
+  const { account } = useWallet();
+
   let depositToken = bank.depositTokenName.toUpperCase();
   if (depositToken === '80BOMB-20BTCB-LP') {
     depositToken = 'BOMB-MAXI';
@@ -43,9 +47,13 @@ const FarmCard = ({ bank }) => {
           </Box>
         </CardContent>
         <CardActions style={{ justifyContent: 'flex-end' }}>
-          <Button className="shinyButtonSecondary" component={Link} to={`/farm/${bank.contract}`}>
-            View
-          </Button>
+          {!!account ? (
+              <Button className="shinyButtonSecondary" component={Link} to={`/farm/${bank.contract}`}>
+                  View
+              </Button>
+          ) : (
+              <UnlockWallet />
+          )}
         </CardActions>
       </Card>
     </Grid>

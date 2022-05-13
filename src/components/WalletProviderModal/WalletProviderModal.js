@@ -23,8 +23,10 @@ const useStyles = makeStyles((theme) => ({
 
 const WalletProviderModal = ({ open, handleClose }) => {
   const classes = useStyles();
-  const { account, connect } = useWallet();
+
+  const { account, connect, error } = useWallet();
   const {ethereum} = window;
+
 
   useEffect(() => {
     if (account) {
@@ -42,6 +44,7 @@ const WalletProviderModal = ({ open, handleClose }) => {
     >
       <div className={classes.paper}>
         <h2>Connect Wallet</h2>
+        { error && <p style={{'color': 'red'}}>{ error.toString() }</p> }
         <List component="nav" aria-label="main mailbox folders">
           <WalletCard
             icon={<img src={metamaskLogo} alt="Metamask logo" style={{ height: 32 }} />}
