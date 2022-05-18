@@ -34,7 +34,8 @@ interface StakeProps {
   bank: Bank;
 }
 
-const Stake: React.FC<StakeProps> = ({bank}) => {
+const Stake: React.FC<StakeProps> = ({ bank }) => {
+  console.log({bank})
   const [approveStatus, approve] = useApprove(bank.depositToken, bank.address);
 
   const {color: themeColor} = useContext(ThemeContext);
@@ -145,7 +146,8 @@ const Stake: React.FC<StakeProps> = ({bank}) => {
                       bank.depositTokenName === 'BOMB-BTCB-LP' ||
                       bank.depositTokenName === '80BOMB-20BTCB-LP' ||
                         bank.depositTokenName === '80BSHARE-20WBNB-LP' ||
-                      bank.depositTokenName === 'BUSM-BUSD-LP' 
+                      bank.depositTokenName === 'BUSM-BUSD-LP' ||
+                      bank.depositTokenName === 'BBOND'
 
                   }
                   onClick={() => (bank.closedForStaking ? null : onPresentZap())}

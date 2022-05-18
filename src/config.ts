@@ -48,6 +48,7 @@ const configurations: { [env: string]: Configuration } = {
       SHIBA: ['0x9ba3e4f84a34df4e08c112e1a0ff148b81655615', 9],
       'USDT-BNB-LP': ['0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16', 18],
       'BUSM-BUSD-LP': ['0xEe46Bd06a8876c3cc86027dc7D2Df19af513cD12', 18],
+      BBOND: ['0xDA1d9C79240003195d0a67f202efcCCC3F78b994', 18],
       'USDT-BTCB-LP': ['0x3f803ec2b816ea7f06ec76aa2b6f2532f9892d62', 18],
       'BOMB-BTCB-LP': ['0x84392649eb0bC1c1532F2180E58Bae4E1dAbd8D6', 18],
       'BOMB-BSHARE-LP': ['0x54f9fE531224Fa43Feb218B20ABa84d22a8fDc0C', 18],
@@ -71,6 +72,7 @@ const configurations: { [env: string]: Configuration } = {
       WBNB: ['0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18],
       FUSDT: ['0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56', 18], // This is actually BUSD on mainnet not fusdt
       BTCB: ['0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c', 18],
+      BBOND: ['0xDA1d9C79240003195d0a67f202efcCCC3F78b994', 18],
       SBTC: ['0x1d28cd41fc594232D05F2AbdAFBb556E7F78Dc2a', 18],
       'BBOMB-BOMB': ['0xcB72214d09a1804E4eecA9C3F3bB6ca49460237b', 18],
       'BBOMB-BTCB': ['0x23EFC2ff90e3423c3F84352b21b49FBcD4C3E32D', 18],
@@ -315,6 +317,17 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     finished: false,
     sort: 4,
     closedForStaking: true,
+  },
+  BBondBShareRewardPool: {
+    name: 'Earn BSHARE by BBOND',
+    poolId: 9,
+    sectionInUI: 3,
+    contract: 'BBondBShareRewardPool',
+    depositTokenName: 'BBOND',
+    earnTokenName: 'BSHARE',
+    finished: false,
+    sort: 4,
+    closedForStaking: false,
   },
   BshareBnbLPBShareRewardPool: {
     name: 'Earn BSHARE by BSHARE-BNB LP',

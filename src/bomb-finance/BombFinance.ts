@@ -326,7 +326,7 @@ export class BombFinance {
    */
   async getPoolAPRs(bank: Bank): Promise<PoolStats> {
     if (this.myAccount === undefined) return;
-    const depositToken = bank.depositToken;
+    let depositToken = bank.depositToken;
     // if (depositToken.symbol === '80BOMB-20BTCB-LP' || depositToken.symbol === '80BSHARE-20WBNB-LP') {
     //   const temp = 'TBD';
     //   return {
@@ -336,7 +336,13 @@ export class BombFinance {
     //   };
     // }
     const poolContract = this.contracts[bank.contract];
-    const depositTokenPrice = await this.getDepositTokenPriceInDollars(bank.depositTokenName, depositToken);
+    let depositTokenValue: ERC20
+    if (bank.depositTokenName === "BBOND") {
+      depositTokenValue = this.BOMB
+    } else {
+      depositTokenValue = depositToken
+    }
+    const depositTokenPrice = await this.getDepositTokenPriceInDollars(bank.depositTokenName, depositTokenValue);
     const stakeInPool = await depositToken.balanceOf(bank.address);
     const TVL = Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal));
     const stat = bank.earnTokenName === 'BOMB' ? await this.getBombStat() : await this.getShareStat();
@@ -445,12 +451,14 @@ export class BombFinance {
       return rewardPerSecond.mul(0).div(1000);
     } else if (depositTokenName.startsWith('BOMB')) {
       return rewardPerSecond.mul(0).div(1000);
+    } else if (depositTokenName.startsWith('BBOND')) {
+      return rewardPerSecond.mul(50).div(1000);
     } else if (depositTokenName.startsWith('BUSM-BUSD')) {
       return rewardPerSecond.mul(100).div(1000);
     } else if (depositTokenName.startsWith('80BOMB')) {
       return rewardPerSecond.mul(200).div(1000);
     } else if (depositTokenName.startsWith('80BSHARE')) {
-      return rewardPerSecond.mul(100).div(1000);
+      return rewardPerSecond.mul(50).div(1000);
     } else {
       return rewardPerSecond.mul(200).div(1000);
     }
@@ -497,6 +505,12 @@ export class BombFinance {
         tokenPrice = await this.getMaxiLPTokenPrice(
           '0x2c374ed1575e5c2c02c569f627299e902a1972cb000200000000000000000027',
         );
+      }
+      else if (tokenName === 'BBOND') {
+        tokenPrice = await this.getTokenPriceFromPancakeswap(this.BOMB);
+        tokenPrice = (Number(tokenPrice) * Number(priceOfOneFtmInDollars)).toString();
+
+
       } else {
         tokenPrice = await this.getTokenPriceFromPancakeswap(token);
         tokenPrice = (Number(tokenPrice) * Number(priceOfOneFtmInDollars)).toString();
