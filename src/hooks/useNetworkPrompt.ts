@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import config from './../config';
 
 /**
@@ -19,7 +19,7 @@ export const connectToNetwork = async (provider: any) => {
           symbol: 'BNB',
           decimals: 18,
         },
-        rpcUrls: [config.defaultProvider],
+        rpcUrls: ['https://rpc.ankr.com/bsc'],
         blockExplorerUrls: [config.ftmscanUrl],
       },
     ],
@@ -28,7 +28,7 @@ export const connectToNetwork = async (provider: any) => {
 
 const usePromptNetwork = () => {
   const [networkPrompt, setNetworkPrompt] = useState(false);
-  const {ethereum} = window as any;
+  const { ethereum } = window as any;
 
   useEffect(() => {
     if (!networkPrompt) {

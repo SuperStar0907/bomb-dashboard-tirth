@@ -100,9 +100,10 @@ const Providers: React.FC = ({children}) => {
                     chainId={config.chainId}
 
           connectors={{
-            walletconnect: {rpcUrl: config.defaultProvider},
+            walletconnect: { rpcUrl: 'https://rpc.ankr.com/bsc' },
             walletlink: {
-              url: config.defaultProvider,
+           //   url: config.defaultProvider,
+              url: 'https://rpc.ankr.com/bsc',
               appName: 'bomb.money',
               appLogoUrl: 'https://raw.githubusercontent.com/bombmoney/bomb-assets/master/bomb-512.png',
             },
