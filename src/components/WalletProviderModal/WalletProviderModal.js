@@ -24,8 +24,7 @@ const useStyles = makeStyles((theme) => ({
 const WalletProviderModal = ({ open, handleClose }) => {
   const classes = useStyles();
 
-  const { account, connect, error } = useWallet();
-  const {ethereum} = window;
+  const { account, ethereum, connect, error } = useWallet();
 
 
   useEffect(() => {
