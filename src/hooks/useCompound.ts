@@ -3,18 +3,18 @@ import useBombFinance from './useBombFinance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 import { Bank } from '../bomb-finance';
 
-const useHarvest = (bank: Bank) => {
-  const bombFinance = useBombFinance();
+const useCompound = (bank: Bank) => {
+  const grapeFinance = useBombFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleReward = useCallback(() => {
     handleTransactionReceipt(
-      bombFinance.harvest(bank.contract, bank.poolId, bank.sectionInUI),
-      `Claim ${bank.earnTokenName} from ${bank.contract}`,
+      grapeFinance.compound(bank.contract, bank.poolId, bank.sectionInUI),
+      `Compound Node rewards`,
     );
-  }, [bank, bombFinance, handleTransactionReceipt]);
+  }, [bank, grapeFinance, handleTransactionReceipt]);
 
-  return { onReward: handleReward };
+  return { onCompound: handleReward };
 };
 
-export default useHarvest;
+export default useCompound;
