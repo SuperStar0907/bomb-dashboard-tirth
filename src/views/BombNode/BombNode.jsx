@@ -55,9 +55,8 @@ const BombNode = () => {
         <PageHeader icon="🏦" subtitle={''} title={bank?.name} />
 
         <Box>
-          {/* <Alert variant="filled" severity="info">
-            Please read our <a style={{ color: '#fff' }} rel="noopener noreferrer" target={'_blank'} href="https://grapefinance.gitbook.io/grape-finance-docs/unique-features/locked-staking-grape-nodes" >Node Docs & Strategy</a> in order to fully understand how our node pools work before purchasing, by partaking you accept the risks outlined in the docs & disclaimer. Sticking to the current strategy helps support the protocol which in turn helps you to continue to earn rewards!
-          </Alert> */}
+          <Alert variant="filled" severity="warning">
+            BOMB Nodes are brand new! Contracts were forked from a reputable source, but have not been tested or studied by the BOMB team yet. Use at your own risk.</Alert>
           <Grid container justify="center" spacing={2} style={{ marginBottom: '50px', marginTop: '20px' }}>
 
             <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
