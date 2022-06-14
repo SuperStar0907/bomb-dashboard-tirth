@@ -12,7 +12,7 @@ const useStake = (bank: Bank) => {
     (amount: string) => {
       const amountBn = parseUnits(amount, bank.depositToken.decimal);
       handleTransactionReceipt(
-        bombFinance.stake(bank.contract, bank.poolId, amountBn),
+        bombFinance.stake(bank.contract, bank.poolId, bank.sectionInUI, amountBn),
         `Stake ${amount} ${bank.depositTokenName} to ${bank.contract}`,
       );
     },

@@ -343,7 +343,7 @@ export class BombFinance {
       depositTokenValue = depositToken
     }
 
-    if (bank.sectionInUI === 3) {
+    if (bank.sectionInUI === 9) {
 
       const [depositTokenPrice, points, totalPoints, tierAmount, poolBalance, totalBalance, dripRate, dailyUserDrip] = await Promise.all([
         this.getDepositTokenPriceInDollars(bank.depositTokenName, depositToken),
@@ -420,7 +420,7 @@ export class BombFinance {
   async compound(poolName: ContractName, poolId: Number, sectionInUI: Number): Promise<TransactionResponse> {
     const pool = this.contracts[poolName];
     //By passing 0 as the amount, we are asking the contract to only redeem the reward and not the currently staked token
-    return sectionInUI !== 3
+    return sectionInUI !== 9
       ? await pool.withdraw(poolId, 0)
       : await pool.compound();
   }
@@ -776,9 +776,12 @@ export class BombFinance {
    * @param amount Number of tokens with decimals applied. (e.g. 1.45 DAI * 10^18)
    * @returns {string} Transaction hash
    */
-  async stake(poolName: ContractName, poolId: Number, amount: BigNumber): Promise<TransactionResponse> {
+  async stake(poolName: ContractName, poolId: Number, sectionInUI: Number, amount: BigNumber): Promise<TransactionResponse> {
     const pool = this.contracts[poolName];
-    return await pool.deposit(poolId, amount);
+
+    return sectionInUI !== 9
+        ? await pool.deposit(poolId, amount)
+        : await pool.create(poolId, amount);
   }
 
   /**
@@ -804,7 +807,7 @@ export class BombFinance {
   async harvest(poolName: ContractName, poolId: Number, sectionInUI: Number): Promise<TransactionResponse> {
     const pool = this.contracts[poolName];
     //By passing 0 as the amount, we are asking the contract to only redeem the reward and not the currently staked token
-    return sectionInUI !== 3
+    return sectionInUI !== 9
       ? await pool.withdraw(poolId, 0)
       : await pool.claim();
   }
