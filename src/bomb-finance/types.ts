@@ -14,6 +14,7 @@ export interface BankInfo {
   closedForStaking: boolean;
 }
 
+
 export interface MaxiInfo {
   totalShares: string;
   totalLiquidity: string;
@@ -25,7 +26,14 @@ export interface Bank extends BankInfo {
   earnToken: ERC20;
 }
 
+export type NodesRewardWalletBalance = {
+  bomb: string;
+  lp: string;
+}
+
 export type PoolStats = {
+  userDailyBurst?: string;
+  userYearlyBurst?: string;
   dailyAPR: string;
   yearlyAPR: string;
   TVL: string;

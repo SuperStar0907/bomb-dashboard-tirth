@@ -361,7 +361,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     finished: false,
     sort: 4,
     closedForStaking: false,
-  }
+  },
   //   LPNode: {
   //   name: 'Generate LP with Nodes',
   //   poolId: 0,
@@ -373,17 +373,28 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   //   sort: 2,
   //   closedForStaking: false,
   // },
-  //       BombNode: {
-  //   name: 'Generate LP with Nodes',
-  //   poolId: 0,
-  //   sectionInUI: 3,
-  //   contract: 'BombNode',
-  //   depositTokenName: 'BOMB',
-  //   earnTokenName: 'BOMB',
-  //   finished: false,
-  //   sort: 2,
-  //   closedForStaking: false,
-//}
+  BombNode: {
+    name: 'Generate BOMB with Nodes',
+    poolId: 0,
+    sectionInUI: 9,
+    contract: 'BombNode',
+    depositTokenName: 'BOMB',
+    earnTokenName: 'BOMB',
+    finished: false,
+    sort: 2,
+    closedForStaking: false,
+  },
+  LPNode: {
+    name: 'Generate BOMB with Nodes',
+    poolId: 0,
+    sectionInUI: 9,
+    contract: 'LPNode',
+    depositTokenName: 'BOMB-BTCB-LP',
+    earnTokenName: 'BOMB-BTCB-LP',
+    finished: false,
+    sort: 2,
+    closedForStaking: false,
+  }
 };
 
 export default configurations[process.env.NODE_ENV || 'development'];
