@@ -13,7 +13,7 @@ const useTotalNodes = (contract: string, sectionInUI: number) => {
   }, [grapeFinance, contract]);
 
   useEffect(() => {
-    if (sectionInUI === 3) {
+    if (sectionInUI === 9) {
       fetchNodes().catch((err) => console.error(`Failed to fetch APR info: ${err.stack}`));
       const refreshInterval = setInterval(fetchNodes, config.refreshInterval);
       return () => clearInterval(refreshInterval);

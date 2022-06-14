@@ -19,14 +19,14 @@ const Harvest = ({ bank }) => {
   const earnings = useEarnings(bank.contract, bank.earnTokenName, bank.poolId);
   const grapeStats = useGrapeStats();
   const tShareStats = useShareStats();
-  const grapemimLpStats = useLpStatsBTC('GRAPE-MIM-SW');
+  const grapemimLpStats = useLpStatsBTC('BOMB-BTCB-LP');
 
   let tokenStats = 0;
   if (bank.earnTokenName === 'WINE') {
     tokenStats = tShareStats;
   } else if (bank.earnTokenName === 'GRAPE') {
     tokenStats = grapeStats;
-  } else if (bank.earnTokenName === 'GRAPE-MIM-SW') {
+  } else if (bank.earnTokenName === 'BOMB-BTCB-LP') {
     tokenStats = grapemimLpStats;
   }
   const nodePrice = useNodePrice(bank.contract, bank.poolId, bank.sectionInUI);
@@ -51,10 +51,10 @@ const Harvest = ({ bank }) => {
             <CardIcon>
               <TokenSymbol symbol={bank.earnTokenName} />
             </CardIcon>
-            <Typography style={{ textTransform: 'uppercase', color: '#930993' }}>
+            <Typography>
               <Value value={getDisplayBalance(earnings)} />
             </Typography>
-            <Label text={bank.earnTokenName === 'GRAPE-MIM-SW' ? `≈ $${earnedInDollarsLP}` : `≈ $${earnedInDollars}`} />
+            <Label text={bank.earnTokenName === 'BOMB-BTCB-LP' ? `≈ $${earnedInDollarsLP}` : `≈ $${earnedInDollars}`} />
             <Typography style={{ textTransform: 'uppercase', color: '#fff' }}>{bank.earnTokenName} Earned</Typography>
           </StyledCardHeader>
           <StyledCardActions>

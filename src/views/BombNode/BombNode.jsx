@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const GrapeNode = () => {
+const BombNode = () => {
   const { bankId } = useParams();
 
   const bank = useBank(bankId);
@@ -55,9 +55,9 @@ const GrapeNode = () => {
         <PageHeader icon="🏦" subtitle={''} title={bank?.name} />
 
         <Box>
-          <Alert variant="filled" severity="info">
+          {/* <Alert variant="filled" severity="info">
             Please read our <a style={{ color: '#fff' }} rel="noopener noreferrer" target={'_blank'} href="https://grapefinance.gitbook.io/grape-finance-docs/unique-features/locked-staking-grape-nodes" >Node Docs & Strategy</a> in order to fully understand how our node pools work before purchasing, by partaking you accept the risks outlined in the docs & disclaimer. Sticking to the current strategy helps support the protocol which in turn helps you to continue to earn rewards!
-          </Alert>
+          </Alert> */}
           <Grid container justify="center" spacing={2} style={{ marginBottom: '50px', marginTop: '20px' }}>
 
             <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
@@ -139,12 +139,12 @@ const GrapeNode = () => {
               <StyledCardWrapper>{<Stake bank={bank} />}</StyledCardWrapper>
             </StyledCardsWrapper>
             <Spacer size="lg" />
-            {bank.depositTokenName === 'GRAPE-MIM-SW' ?
+            {bank.depositTokenName === 'BOMB-BTCB-LP' ?
               <Card>
                 <CardContent >
-                  <StyledLink href={'https://www.swapsicle.io/add/0x5541D83EFaD1f281571B343977648B75d95cdAC2/0x130966628846BFd36ff31a822705796e8cb8C18D'} rel="noopener noreferrer" target="_blank">
+                  <StyledLink href={'https://pancakeswap.finance/add/0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c/'} rel="noopener noreferrer" target="_blank">
                     <span style={{ color: '#fff' }}>
-                      Provide liquidity for GRAPE-MIM on Swapsicle
+                      Provide liquidity for BOMB-BTCB on PancakeSwap
                     </span>
                   </StyledLink>
                 </CardContent>
@@ -152,6 +152,7 @@ const GrapeNode = () => {
               : null}
           </StyledBank>
         </Box>
+
 
       </>
     )
@@ -209,4 +210,4 @@ const Center = styled.div`
 `;
 
 
-export default GrapeNode;
+export default BombNode;

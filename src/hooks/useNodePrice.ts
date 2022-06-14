@@ -10,12 +10,12 @@ const useNodePrice = (poolName: ContractName, poolId: Number, sectionInUI: Numbe
   const grapeFinance = useBombFinance();
 
   const fetchAmount = useCallback(async () => {
-    const balance = sectionInUI === 3 ? await grapeFinance.getNodePrice(poolName, poolId) : BigNumber.from(0);
+    const balance = sectionInUI === 9 ? await grapeFinance.getNodePrice(poolName, poolId) : BigNumber.from(0);
     setAmount(balance);
   }, [poolName, poolId, sectionInUI, grapeFinance]);
 
   useEffect(() => {
-    if (sectionInUI === 3) {
+    if (sectionInUI === 9) {
       fetchAmount().catch((err) => console.error(err.stack));
 
       const refreshBalance = setInterval(fetchAmount, config.refreshInterval);

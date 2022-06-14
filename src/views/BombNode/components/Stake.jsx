@@ -56,22 +56,18 @@ const Stake = ({ bank }) => {
   return (
     <Card>
       <CardContent>
-        {bank.depositTokenName === 'GRAPE-MIM-SW' ? <Button
-          onClick={() => {
-            grapeFinance.watchAssetInMetamask('SW');
-          }}
-          style={{ position: 'relative', top: '0px' }}
-        >
-          {' '}
-          <b>+</b>&nbsp;&nbsp;
-          <img alt="metamask fox" style={{ width: '20px' }} src={MetamaskFox} />
-        </Button> : null}
+
         <StyledCardContentInner>
           <StyledCardHeader>
             <CardIcon>
-              <TokenSymbol symbol={'BOMB'} size={54} />
+              {
+                bank.depositTokenName == 'BOMB-BTCB-LP'
+                  ? <TokenSymbol symbol={'BOMB-BTCB-LP'} size={54} />
+                  : <TokenSymbol symbol={'BOMB'} size={54} />
+              }
+
             </CardIcon>
-            <Typography style={{ textTransform: 'uppercase', color: '#930993' }}>
+            <Typography >
               <Value value={getDisplayBalance(nodePrice, bank.depositToken.decimal, 1)} />
             </Typography>
 

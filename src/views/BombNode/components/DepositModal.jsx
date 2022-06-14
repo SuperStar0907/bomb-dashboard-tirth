@@ -51,9 +51,9 @@ const DepositModal = ({ bank, max, decimals, onConfirm, onDismiss, tokenName = '
   return (
     <Modal>
       <ReactTooltip effect="solid" clickable type="dark" place="bottom" />
-      <ModalTitle text={bank.sectionInUI !== 3 ? `Deposit ${tokenName}` : `Purchase ${getNodeText(bank.poolId)}s`} />
+      <ModalTitle text={bank.sectionInUI !== 9 ? `Deposit ${tokenName}` : `Purchase ${getNodeText(bank.poolId)}s`} />
 
-      {bank.sectionInUI !== 3 ? <><TokenInput
+      {bank.sectionInUI !== 9 ? <><TokenInput
         value={val}
         onSelectMax={handleSelectMax}
         onChange={handleChange}

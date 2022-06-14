@@ -4,7 +4,7 @@ import { Box, Button, Card, CardActions, CardContent, Typography, Grid } from '@
 import TokenSymbol from '../../components/TokenSymbol';
 import useBank from '../../hooks/useBank';
 import useStatsForPool from '../../hooks/useStatsForPool';
-const GrapeCard = ({ }) => {
+const BombCard = ({ }) => {
   const tombBank = useBank('BombNode');
   const statsOnPool = useStatsForPool(tombBank);
   return (
@@ -29,10 +29,10 @@ const GrapeCard = ({ }) => {
               <TokenSymbol size={32} symbol={'BOMB'} />
             </Box>
             <Typography variant="h5" component="h2">
-              Grape Node
+              BOMB Node
             </Typography>
             <Typography color="#322f32">
-              Lock your Grapes to earn daily yields<br></br>
+              Lock your BOMB to earn daily yields<br></br>
               <b>Daily APR:</b> {statsOnPool?.dailyAPR}%<br></br>
               <b>Yearly APR:</b> {statsOnPool?.yearlyAPR}%
             </Typography>
@@ -48,4 +48,4 @@ const GrapeCard = ({ }) => {
   );
 };
 
-export default GrapeCard;
+export default BombCard;

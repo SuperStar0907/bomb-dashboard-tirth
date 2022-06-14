@@ -381,11 +381,11 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     depositTokenName: 'BOMB',
     earnTokenName: 'BOMB',
     finished: false,
-    sort: 2,
+    sort: 1,
     closedForStaking: false,
   },
   LPNode: {
-    name: 'Generate BOMB with Nodes',
+    name: 'Generate LPs with Nodes',
     poolId: 0,
     sectionInUI: 9,
     contract: 'LPNode',

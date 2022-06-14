@@ -1,1 +1,1 @@
-export { default } from './BombNode';
+export { default } from './BombNodes';
