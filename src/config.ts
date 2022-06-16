@@ -255,7 +255,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   BombMaxiLPBShareRewardPool: {
     name: 'Earn BSHARE by BOMB Maxi LP',
     poolId: 7,
-    sectionInUI: 2,
+    sectionInUI: 0,
     contract: 'BombMaxiLPBShareRewardPool',
     depositTokenName: '80BOMB-20BTCB-LP',
     earnTokenName: 'BSHARE',
@@ -266,7 +266,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   BshareMaxiLPBShareRewardPool: {
     name: 'Earn BSHARE by BSHARE Maxi LP',
     poolId: 8,
-    sectionInUI: 2,
+    sectionInUI: 0,
     contract: 'BshareMaxiLPBShareRewardPool',
     depositTokenName: '80BSHARE-20WBNB-LP',
     earnTokenName: 'BSHARE',
@@ -321,13 +321,13 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   BBondBShareRewardPool: {
     name: 'Earn BSHARE by BBOND',
     poolId: 9,
-    sectionInUI: 3,
+    sectionInUI: 0,
     contract: 'BBondBShareRewardPool',
     depositTokenName: 'BBOND',
     earnTokenName: 'BSHARE',
     finished: false,
     sort: 4,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   BshareBnbLPBShareRewardPool: {
     name: 'Earn BSHARE by BSHARE-BNB LP',
