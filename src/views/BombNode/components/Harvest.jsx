@@ -54,8 +54,8 @@ const Harvest = ({ bank }) => {
             <Typography>
               <Value value={getDisplayBalance(earnings)} />
             </Typography>
-            <Label text={bank.earnTokenName === 'BOMB-BTCB-LP' ? `≈ $${earnedInDollarsLP}` : `≈ $${earnedInDollars}`} />
-            <Typography style={{ textTransform: 'uppercase', color: '#fff' }}>{bank.earnTokenName} Earned</Typography>
+            <Label text={bank.earnTokenName === 'BOMB-BTCB-LP' ? `≈ $${earnedInDollarsLP}` : `≈ $${earnedInDollars}`} variant="yellow" />
+            <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>{bank.earnTokenName} Earned</Typography>
           </StyledCardHeader>
           <StyledCardActions>
             <Button

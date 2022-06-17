@@ -63,7 +63,7 @@ const BombNode = () => {
 
               <Card className={classes.gridItem}>
                 <CardContent style={{ textAlign: 'center' }}>
-                  <Typography style={{ color: '#ccf' }}>Your Nodes | Value</Typography>
+                  <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>Your Nodes | Value</Typography>
                   <Typography>
                     {
                       nodes[0] &&
@@ -85,7 +85,7 @@ const BombNode = () => {
             <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
               <Card className={classes.gridItem}>
                 <CardContent style={{ textAlign: 'center' }}>
-                  <Typography style={{ color: '#ccf' }}>Daily | $</Typography>
+                  <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>Daily | $</Typography>
                   <Typography>{(Number(daily) / 1e18).toFixed(2)} | $ {((Number(daily) / 1e18) * (tokenPriceInDollars)).toFixed(2)}</Typography>
                 </CardContent>
               </Card>
@@ -93,7 +93,7 @@ const BombNode = () => {
             <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
               <Card className={classes.gridItem}>
                 <CardContent style={{ textAlign: 'center' }}>
-                  <Typography style={{ color: '#ccf' }}>Amount Claimed</Typography>
+                  <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>Amount Claimed</Typography>
                   <Typography>{(Number(userDetails.total_claims) / 1e18).toFixed(2)} </Typography>
                 </CardContent>
               </Card>
@@ -101,7 +101,7 @@ const BombNode = () => {
             <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
               <Card className={classes.gridItem}>
                 <CardContent style={{ textAlign: 'center' }}>
-                  <Typography style={{ color: '#ccf' }}>Max Possible Pay</Typography>
+                  <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>Max Possible Pay</Typography>
                   <Typography>{Number(max) / 1e18} </Typography>
                 </CardContent>
               </Card>
@@ -109,7 +109,7 @@ const BombNode = () => {
             <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
               <Card className={classes.gridItem}>
                 <CardContent style={{ textAlign: 'center' }}>
-                  <Typography style={{ color: '#ccf' }}>APR | Daily</Typography>
+                  <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>APR | Daily</Typography>
                   <Typography>{bank.closedForStaking ? '0.00' : statsOnPool?.yearlyAPR}% | {bank.closedForStaking ? '0.00' : statsOnPool?.dailyAPR}%</Typography>
                 </CardContent>
               </Card>
@@ -118,7 +118,7 @@ const BombNode = () => {
             <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
               <Card className={classes.gridItem}>
                 <CardContent style={{ textAlign: 'center' }}>
-                  <Typography style={{ color: '#ccf' }}>Total Nodes | TVL</Typography>
+                  <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>Total Nodes | TVL</Typography>
                   <Typography>{Number(total[0])} | ${statsOnPool?.TVL ? (Number((Number(statsOnPool?.TVL).toFixed(0)))).toLocaleString('en-US') : '-.--'}</Typography>
                 </CardContent>
               </Card>

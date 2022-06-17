@@ -71,9 +71,9 @@ const Stake = ({ bank }) => {
               <Value value={getDisplayBalance(nodePrice, bank.depositToken.decimal, 1)} />
             </Typography>
 
-            <Label text={`≈ $${earnedInDollars}`} />
+            <Label text={`≈ $${earnedInDollars}`} variant="yellow" />
 
-            <Typography style={{ textTransform: 'uppercase', color: '#fff' }}>{`${bank.earnTokenName} NODE COST`}</Typography>
+            <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>{`${bank.earnTokenName} NODE COST`}</Typography>
           </StyledCardHeader>
           <StyledCardActions>
             {approveStatus !== ApprovalState.APPROVED ? (
