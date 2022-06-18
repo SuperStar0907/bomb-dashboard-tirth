@@ -780,8 +780,8 @@ export class BombFinance {
     const pool = this.contracts[poolName];
 
     return sectionInUI !== 9
-        ? await pool.deposit(poolId, amount)
-        : await pool.create(poolId, amount);
+      ? await pool.deposit(poolId, amount)
+      : await pool.create(poolId, amount);
   }
 
   /**

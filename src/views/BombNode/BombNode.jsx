@@ -55,8 +55,8 @@ const BombNode = () => {
         <PageHeader icon="🏦" subtitle={''} title={bank?.name} />
 
         <Box>
-          <Alert variant="filled" severity="warning">
-            BOMB Nodes are brand new! Contracts were forked from a reputable source, but have not been tested or studied by the BOMB team yet. Use at your own risk.</Alert>
+          {/* <Alert variant="filled" severity="warning">
+            BOMB Nodes are brand new! Contracts were forked from a reputable source, but have not been tested or studied by the BOMB team yet. Use at your own risk.</Alert> */}
           <Grid container justify="center" spacing={2} style={{ marginBottom: '50px', marginTop: '20px' }}>
 
             <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
