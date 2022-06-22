@@ -1,6 +1,6 @@
 import Moralis from 'moralis/node';
 
-export const getLeaderboardTotal = async (lotteries, from, to, wallet) => {
+export const getLeaderboardTotal = async (lotteries, from, to) => {
   const combinedEntries = {};
   for (var i = 0; i < lotteries.length; i++) {
     let start = from.toDate().toISOString();
@@ -13,7 +13,6 @@ export const getLeaderboardTotal = async (lotteries, from, to, wallet) => {
       limit: limit,
       table: lotteries[i].table,
       entries: lotteries[i].entries,
-      wallet: wallet,
     });
 
     events.forEach(event => {

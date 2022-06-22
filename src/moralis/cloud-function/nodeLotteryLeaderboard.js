@@ -8,20 +8,14 @@ Moralis.Cloud.define("nodeLotteryLeaderboard", async (request) => {
   let limit = request.params.limit;
   let table = request.params.table;
   let entries = request.params.entries;
-  let wallet = request.params.wallet;
-
-  const pfilterAnd = [
-    { $gte: ["$_created_at", { "$toDate": start }] },
-    { $lte: ["$_created_at", { "$toDate": end }] }
-  ];
-  if (wallet) {
-    pfilterAnd.push({ $eq: ["$account", wallet ] });
-  }
 
   const pfilter = {
     match: {
       $expr: {
-        $and: pfilterAnd
+        $and: [
+          { $gte: ["$_created_at", { "$toDate": start }] },
+          { $lte: ["$_created_at", { "$toDate": end }] }
+        ]
       }
     }
   };

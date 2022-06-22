@@ -57,9 +57,10 @@ const BombNodes = () => {
       appId: moralisConfiguration.appId,
     });
 
-    setLeaderboardData(await getLeaderboardTotal(lotteries, from, to, null));
+    const leaderboardData = await getLeaderboardTotal(lotteries, from, to);
+    setLeaderboardData(leaderboardData);
     if (account) {
-      const userEntries = await getLeaderboardTotal(lotteries, from, to, account);
+      const userEntries = leaderboardData.filter(data => data.wallet.toLowerCase() === account.toLowerCase());
       setUserEntries(userEntries.length > 0 ? userEntries : [{ 'entries': 0 }]);
     }
   };
