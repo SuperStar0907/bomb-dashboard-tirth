@@ -79,7 +79,7 @@ const Lottery = () => {
                     {leaderboardData.map((item, index) => (
                       <tr key={index}>
                         <td>{index + 1}.</td>
-                        <td>{item.wallet}</td>
+                        <td>{'0x...' + item.wallet.slice(-8)}</td>
                         <td style={{ textAlign: 'center' }}>{item.entries0}</td>
                         <td style={{ textAlign: 'center' }}>{item.entries1}</td>
                         <td style={{ textAlign: 'center' }}>{item.entries}</td>
