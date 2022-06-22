@@ -7,7 +7,6 @@ Moralis.Cloud.define("nodeLotteryLeaderboard", async (request) => {
   let end = new Date(request.params.end).toISOString();
   let limit = request.params.limit;
   let table = request.params.table;
-  let entries = request.params.entries;
 
   const pfilter = {
     match: {
@@ -19,7 +18,7 @@ Moralis.Cloud.define("nodeLotteryLeaderboard", async (request) => {
       }
     }
   };
-  const pgroup = { group: { objectId: "$account", total: { $sum: entries } } };
+  const pgroup = { group: { objectId: "$account", total: { $sum: {$toLong : '$num' } } } };
   const psort = { sort : { total: -1 } };
   const plimit = { limit: limit };
   const pipeline = [pfilter, pgroup, psort, plimit];

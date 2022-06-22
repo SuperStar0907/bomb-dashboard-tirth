@@ -24,8 +24,8 @@ export const getLeaderboardTotal = async (lotteries, from, to) => {
           entries: 0,
         }
       }
-      combinedEntries[event.objectId]['entries' + i] = combinedEntries[event.objectId]['entries' + i] + event.total;
-      combinedEntries[event.objectId].entries = combinedEntries[event.objectId].entries + event.total;
+      combinedEntries[event.objectId]['entries' + i] = combinedEntries[event.objectId]['entries' + i] + (event.total * lotteries[i].entries);
+      combinedEntries[event.objectId].entries = combinedEntries[event.objectId].entries + event.total + (event.total * lotteries[i].entries);
     });
   }
 
