@@ -1,6 +1,6 @@
-import { Grid } from '@material-ui/core';
+import { Button, Card, CardContent, Grid, Typography } from '@material-ui/core';
 import React from 'react';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
 import Page from '../../components/Page';
 import BombNode from '../BombNode';
 import BombCard from './BombCard';
@@ -8,6 +8,9 @@ import LPCard from './LPCard';
 import { Helmet } from 'react-helmet';
 import { createGlobalStyle } from 'styled-components';
 import HomeImage from '../../assets/img/background.jpg';
+import ProgressCountdown from '../Boardroom/components/ProgressCountdown';
+import moment from 'moment';
+import { makeStyles } from '@material-ui/core/styles';
 
 const BackgroundImage = createGlobalStyle`
   body {
@@ -19,9 +22,21 @@ const BackgroundImage = createGlobalStyle`
 
 const TITLE = 'bomb.money | Nodes';
 
+const useStyles = makeStyles((theme) => ({
+  gridItem: {
+    height: '100%',
+    [theme.breakpoints.up('md')]: {
+      height: '90px',
+    },
+  },
+}));
 
 const BombNodes = () => {
+  const classes = useStyles();
   const { path } = useRouteMatch();
+
+  const to = moment('2022-06-26 6:00 +0000').toDate();
+
   return (
     <Page>
       <BackgroundImage />
@@ -34,6 +49,44 @@ const BombNodes = () => {
           <Grid container spacing={3} style={{ marginTop: '20px' }}>
             <BombCard />
             <LPCard />
+          </Grid>
+          <p>&nbsp;</p>
+          <h1 style={{ fontSize: '80px', textAlign: 'center' }}>LOTTERY</h1>
+          <Grid container justify="center" spacing={3}>
+            <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
+              <Card className={classes.gridItem}>
+                <CardContent style={{ textAlign: 'center' }}>
+                  <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>Next Draw</Typography>
+                  <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={to} description="Next Draw" />
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+          <Grid container justify="center" spacing={3}>
+            <Grid item xs={12} md={2} lg={2}>
+              <p style={{lineHeight: '5px'}}>&nbsp;</p>
+              <Button className="shinyButtonSecondary" style={{ 'width': '100%' }} component={Link}
+                      to={'/nodes-lottery'}>
+                View leaderboard
+              </Button>
+            </Grid>
+          </Grid>
+          <Grid container justify="center" spacing={3}>
+            <Grid item xs={12} md={7} lg={7}>
+              <p style={{lineHeight: '5px', marginTop: 0, marginBottom: '7px'}}>&nbsp;</p>
+              <Card style={{padding: '10px'}}>
+                <p style={{ color: '#fff' }}>
+                  Create nodes and enter into our weekly lottery for the chance to win X BSHARES.
+                  <ol style={{'paddingLeft': '20px'}}>
+                    <li>Draws occur weekly, every Sunday at 6PM UTC.</li>
+                    <li>Each BOMB Node created before the draw automatically earns you 1 entry.</li>
+                    <li>Each LP Node created before the draw automatically earns you 10 entries.</li>
+                    <li>The wallet with the most entries at the time of the draw automatically wins the first spot.</li>
+                    <li>A second winner is randomly selected based on their entries.</li>
+                  </ol>
+                </p>
+              </Card>
+            </Grid>
           </Grid>
         </Route>
         <Route path={`${path}/:bankId`}>

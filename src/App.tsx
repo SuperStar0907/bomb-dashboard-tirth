@@ -73,7 +73,7 @@ const App: React.FC = () => {
             <Route path="/nodes">
               <Node />
             </Route>
-            <Route path="/lottery">
+            <Route path="/nodes-lottery">
               <Lottery />
             </Route>
             {/* <Route path="/sbs">

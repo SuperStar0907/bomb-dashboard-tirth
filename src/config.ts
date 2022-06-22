@@ -406,12 +406,12 @@ export const lotteries = [
   {
     title: 'Bomb Node',
     table: 'BombNode',
-    periodDays: -7,
+    entries: 1
   },
   {
     title: 'BOMB-BTCB-LP NODE',
     table: 'LPNode',
-    periodDays: -7,
+    entries: 10
   }
 ]
 

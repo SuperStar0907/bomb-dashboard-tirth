@@ -7,6 +7,7 @@ import { createGlobalStyle } from 'styled-components';
 import HomeImage from '../../assets/img/background.jpg';
 import { lotteries, moralisConfiguration } from '../../config';
 import moment from 'moment/moment';
+import { getLeaderboardTotal } from './util/getLeaderboardTotal';
 
 const BackgroundImage = createGlobalStyle`
   body {
@@ -23,6 +24,9 @@ const Lottery = () => {
   const { path } = useRouteMatch();
   const [leaderboardData, setLeaderboardData] = useState(null);
 
+  const from = moment('2022-06-19 6:00 +0000');
+  const to = moment('2022-06-26 6:00 +0000');
+
   useEffect(() => {
     fetchLeaderboardData();
   }, []);
@@ -35,27 +39,7 @@ const Lottery = () => {
       appId: moralisConfiguration.appId,
     });
 
-    const mappedLoterries = [];
-    for (var i = 0; i < lotteries.length; i++) {
-      const now = moment();
-      let start = moment().day(lotteries[i].periodDays).toDate().toISOString();
-      let end = now.toDate().toISOString();
-      let limit = 16;
-
-      const events = await Moralis.Cloud.run("eventsLeaderboard", {
-        start: start,
-        end: end,
-        limit: limit,
-        table: lotteries[i].table,
-      });
-
-      mappedLoterries.push({
-        'title': lotteries[i].title + ' Leaderboard',
-        'data': events,
-      });
-    }
-
-    setLeaderboardData(mappedLoterries);
+    setLeaderboardData(await getLeaderboardTotal(lotteries, from, to));
   };
 
   return (
@@ -67,31 +51,38 @@ const Lottery = () => {
       <h1 style={{ fontSize: '80px', textAlign: 'center' }}>LOTTERY</h1>
       <h2 style={{ textAlign: 'center' }}>Leaderboards</h2>
       <p style={{'textAlign': 'center', 'color': '#fff'}}>
-        The following leaderboards are based on the number of new nodes created in the past 7 days.
+        The following leaderboard is based on the number of new nodes created within the period
+      </p>
+      <p style={{'textAlign': 'center', 'color': '#fff', 'fontWeight': 'bold' }}>
+        { from.format('DD-MM-YYYY') } to { to.format('DD-MM-YYYY') }
       </p>
       <Grid container spacing={3} style={{ marginTop: '20px' }}>
-        {leaderboardData && leaderboardData.map((lottery, index) => (
-          <Grid item xs={12} sm={6} md={6} key={index}>
+        {leaderboardData && (
+          <Grid item xs={12} sm={12} md={12}>
             <Card variant="outlined">
               <CardContent>
                 <Box style={{ position: 'relative' }}>
-                  <Typography variant="h5" component="h2">
-                    {lottery.title}
+                  <Typography variant="h5" component="h2" style={{'textAlign': 'center'}}>
+                    Leaderboard
                   </Typography>
                   <table style={{'width': '100%'}}>
                     <thead>
                     <tr>
                       <th>&nbsp;</th>
                       <th style={{ textAlign: 'left' }}>Wallet</th>
-                      <th>Tickets</th>
+                      <th>BOMB Node Entries</th>
+                      <th>BOMB-BTCB-LP Node Entries</th>
+                      <th>Total Entries</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {lottery.data.map((item, index) => (
+                    {leaderboardData.map((item, index) => (
                       <tr key={index}>
                         <td>{index + 1}.</td>
-                        <td>{item.objectId}</td>
-                        <td style={{ textAlign: 'center' }}>{item.total}</td>
+                        <td>{item.wallet}</td>
+                        <td style={{ textAlign: 'center' }}>{item.entries0}</td>
+                        <td style={{ textAlign: 'center' }}>{item.entries1}</td>
+                        <td style={{ textAlign: 'center' }}>{item.entries}</td>
                       </tr>
                     ))}
                     </tbody>
@@ -100,7 +91,7 @@ const Lottery = () => {
               </CardContent>
             </Card>
           </Grid>
-        ))}
+        )}
       </Grid>
     </Page>
   );
