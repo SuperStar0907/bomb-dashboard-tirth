@@ -15,7 +15,7 @@ Moralis.Cloud.define("nodeLotteryLeaderboard", async (request) => {
     { $lte: ["$_created_at", { "$toDate": end }] }
   ];
   if (wallet) {
-    pfilterAnd.push({ $eq: ["$account", { "$wallet": wallet }] });
+    pfilterAnd.push({ $eq: ["$account", wallet ] });
   }
 
   const pfilter = {

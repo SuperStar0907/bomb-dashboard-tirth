@@ -39,7 +39,7 @@ const Lottery = () => {
       appId: moralisConfiguration.appId,
     });
 
-    setLeaderboardData(await getLeaderboardTotal(lotteries, from, to));
+    setLeaderboardData(await getLeaderboardTotal(lotteries, from, to, null));
   };
 
   return (

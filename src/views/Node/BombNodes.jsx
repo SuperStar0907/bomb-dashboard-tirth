@@ -1,5 +1,5 @@
 import { Button, Card, CardContent, Grid, Typography } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
 import Page from '../../components/Page';
 import BombNode from '../BombNode';
@@ -11,6 +11,10 @@ import HomeImage from '../../assets/img/background.jpg';
 import ProgressCountdown from '../Boardroom/components/ProgressCountdown';
 import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
+import Moralis from 'moralis/node';
+import { lotteries, moralisConfiguration } from '../../config';
+import { getLeaderboardTotal } from './util/getLeaderboardTotal';
+import { useWallet } from 'use-wallet';
 
 const BackgroundImage = createGlobalStyle`
   body {
@@ -34,8 +38,31 @@ const useStyles = makeStyles((theme) => ({
 const BombNodes = () => {
   const classes = useStyles();
   const { path } = useRouteMatch();
+  const { account } = useWallet();
+  const [leaderboardData, setLeaderboardData] = useState(null);
+  const [userEntries, setUserEntries] = useState(null);
 
-  const to = moment('2022-06-26 6:00 +0000').toDate();
+  const from = moment('2022-06-19 6:00 +0000');
+  const to = moment('2022-06-26 6:00 +0000');
+
+  useEffect(() => {
+    fetchLeaderboardData();
+  }, [account]);
+
+  const fetchLeaderboardData = async () => {
+    // const params =  { };
+    const Moralis = require('moralis/node');
+    await Moralis.start({
+      serverUrl: moralisConfiguration.serverUrl,
+      appId: moralisConfiguration.appId,
+    });
+
+    setLeaderboardData(await getLeaderboardTotal(lotteries, from, to, null));
+    if (account) {
+      const userEntries = await getLeaderboardTotal(lotteries, from, to, account);
+      setUserEntries(userEntries.length > 0 ? userEntries : [{ 'entries': 0 }]);
+    }
+  };
 
   return (
     <Page>
@@ -57,7 +84,27 @@ const BombNodes = () => {
               <Card className={classes.gridItem}>
                 <CardContent style={{ textAlign: 'center' }}>
                   <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>Next Draw</Typography>
-                  <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={to} description="Next Draw" />
+                  <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={to.toDate()} description="Next Draw" />
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
+              <Card className={classes.gridItem}>
+                <CardContent style={{ textAlign: 'center' }}>
+                  <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>Your entries</Typography>
+                  { userEntries && userEntries.length > 0 ? (
+                    <>{userEntries[0].entries}</>
+                  ) : '-' }
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
+              <Card className={classes.gridItem}>
+                <CardContent style={{ textAlign: 'center' }}>
+                  <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>Current leader</Typography>
+                  { leaderboardData && leaderboardData.length > 0 ? (
+                    <>{leaderboardData[0].entries}</>
+                  ) : '-' }
                 </CardContent>
               </Card>
             </Grid>
