@@ -397,4 +397,22 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   }
 };
 
+export const moralisConfiguration = {
+  appId: 'rKCeM86ivDaLSVJE2ziOqgtkBfSVnj0cc9NYILPQ',
+  serverUrl: 'https://2xvvv0bwaosj.usemoralis.com:2053/server'
+}
+
+export const lotteries = [
+  {
+    title: 'Bomb Node',
+    table: 'BombNode',
+    entries: 1
+  },
+  {
+    title: 'BOMB-BTCB-LP NODE',
+    table: 'LPNode',
+    entries: 10
+  }
+]
+
 export default configurations[process.env.NODE_ENV || 'development'];
