@@ -18,7 +18,7 @@ import Popups from './components/Popups';
 import useChainId from './hooks/useChainId';
 //import Regulations from './views/Regulations/Regulations';
 import { RefreshContextProvider } from './contexts/RefreshContext';
-
+const Dashboard = lazy(() => import('./views/Dashboard'));
 const Home = lazy(() => import('./views/Home'));
 const Farm = lazy(() => import('./views/Farm'));
 const Boardroom = lazy(() => import('./views/Boardroom'));
@@ -75,6 +75,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/nodes-lottery">
               <Lottery />
+            </Route>
+            <Route path="/dashboard">
+              <Dashboard />
             </Route>
             {/* <Route path="/sbs">
               <SBS />
