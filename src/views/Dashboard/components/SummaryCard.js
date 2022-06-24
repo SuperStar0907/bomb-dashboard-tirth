@@ -81,7 +81,6 @@ const Boardroom = () => {
         <Grid item xs={12} sm={12} md={5} className={classes.gridItem}>
           <Grid container spacing={3}>
             <Grid item xs={1} sm={1} md={1}></Grid>
-            <Grid item xs={1} sm={1} md={1}></Grid>
             <Grid item xs={2} sm={2} md={2}></Grid>
             <Grid item xs={2} sm={2} md={2}>
               <Typography style={{
@@ -114,8 +113,7 @@ const Boardroom = () => {
           </Grid>
           <Line color="#f5f5f5" />
           <Grid container spacing={3}>
-            <Grid item xs={1} sm={1} md={1}></Grid>
-            <Grid item xs={1} sm={1} md={1}><img src={bombLogo} alt="Bomb logo" style={{ height: 32 }} /></Grid>
+            <Grid item xs={1} sm={1} md={1}><img src={bombLogo} alt="Bomb logo" style={{ height: 20 }} /></Grid>
             <Grid item xs={2} sm={2} md={2}>
               <Typography style={{
                 fontFamily: 'Nunito',
@@ -163,8 +161,7 @@ const Boardroom = () => {
           </Grid>
           <Line color="#f5f5f5" />
           <Grid container spacing={3}>
-            <Grid item xs={1} sm={1} md={1}></Grid>
-            <Grid item xs={1} sm={1} md={1}><img src={bsharesLogo} alt="Bshares logo" style={{ height: 32 }} /></Grid>
+            <Grid item xs={1} sm={1} md={1}><img src={bsharesLogo} alt="Bshares logo" style={{ height: 20 }} /></Grid>
             <Grid item xs={2} sm={2} md={2}>
               <Typography style={{
                 fontFamily: 'Nunito',
@@ -212,8 +209,7 @@ const Boardroom = () => {
           </Grid>
           <Line color="#f5f5f5" />
           <Grid container spacing={3}>
-            <Grid item xs={1} sm={1} md={1}></Grid>
-            <Grid item xs={1} sm={1} md={1}><img src={bbondLogo} alt="BBond logo" style={{ height: 32 }} /></Grid>
+            <Grid item xs={1} sm={1} md={1}><img src={bbondLogo} alt="BBond logo" style={{ height: 20 }} /></Grid>
             <Grid item xs={2} sm={2} md={2}>
               <Typography style={{
                 fontFamily: 'Nunito',
