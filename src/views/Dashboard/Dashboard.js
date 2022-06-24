@@ -1,11 +1,12 @@
 import React, { useMemo } from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import {Container} from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import Page from '../../components/Page';
 import { createGlobalStyle } from 'styled-components';
 import { Helmet } from 'react-helmet';
 import HomeImage from '../../assets/img/background.jpg';
 import SummaryCard from './components/SummaryCard';
+import BoardroomanAndNews from './components/BoardroomAndNews';
 const BackgroundImage = createGlobalStyle`
   body {
     background: url(${HomeImage}) repeat !important;
@@ -28,6 +29,7 @@ const Farm = () => {
           </Helmet>
           <Container maxWidth="lg">
             <SummaryCard></SummaryCard>
+            <BoardroomanAndNews></BoardroomanAndNews>
           </Container>
         </Route>
       </Page>

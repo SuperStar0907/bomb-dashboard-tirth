@@ -49,7 +49,7 @@ const Line = ({ color }) => (
     }}
   />
 );
-const Boardroom = () => {
+const SummaryCard = () => {
   const classes = useStyles();
   const { account } = useWallet();
   const { onRedeem } = useRedeemOnBoardroom();
@@ -113,7 +113,7 @@ const Boardroom = () => {
           </Grid>
           <Line color="#f5f5f5" />
           <Grid container spacing={3}>
-            <Grid item xs={1} sm={1} md={1}><img src={bombLogo} alt="Bomb logo" style={{ height: 20 }} /></Grid>
+            <Grid item xs={1} sm={1} md={1}><img src={bombLogo} alt="Bomb logo" style={{ height: 20,marginLeft:10 }} /></Grid>
             <Grid item xs={2} sm={2} md={2}>
               <Typography style={{
                 fontFamily: 'Nunito',
@@ -161,7 +161,7 @@ const Boardroom = () => {
           </Grid>
           <Line color="#f5f5f5" />
           <Grid container spacing={3}>
-            <Grid item xs={1} sm={1} md={1}><img src={bsharesLogo} alt="Bshares logo" style={{ height: 20 }} /></Grid>
+            <Grid item xs={1} sm={1} md={1}><img src={bsharesLogo} alt="Bshares logo" style={{ height: 20,marginLeft:10 }} /></Grid>
             <Grid item xs={2} sm={2} md={2}>
               <Typography style={{
                 fontFamily: 'Nunito',
@@ -209,7 +209,7 @@ const Boardroom = () => {
           </Grid>
           <Line color="#f5f5f5" />
           <Grid container spacing={3}>
-            <Grid item xs={1} sm={1} md={1}><img src={bbondLogo} alt="BBond logo" style={{ height: 20 }} /></Grid>
+            <Grid item xs={1} sm={1} md={1}><img src={bbondLogo} alt="BBond logo" style={{ height: 20,marginLeft:10 }} /></Grid>
             <Grid item xs={2} sm={2} md={2}>
               <Typography style={{
                 fontFamily: 'Nunito',
@@ -515,11 +515,12 @@ const StyledCardsWrapper = styled.div`
 
 const StyledCardWrapper = styled.div`
 background: rgba(32, 37, 67, 0.5);
+margin-bottom: 20px;
 border-radius: 5px;
   @media (max-width: 768px) {
     width: 80%;
   }
 `;
 
-export default Boardroom;
+export default SummaryCard;
 
