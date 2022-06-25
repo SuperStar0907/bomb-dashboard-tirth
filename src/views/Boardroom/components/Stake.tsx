@@ -11,14 +11,11 @@ import {AddIcon, RemoveIcon} from '../../../components/icons';
 import IconButton from '../../../components/IconButton';
 import Label from '../../../components/Label';
 import Value from '../../../components/Value';
-
 import useApprove, {ApprovalState} from '../../../hooks/useApprove';
 import useModal from '../../../hooks/useModal';
 import useTokenBalance from '../../../hooks/useTokenBalance';
 import useWithdrawCheck from '../../../hooks/boardroom/useWithdrawCheck';
-
 import {getDisplayBalance} from '../../../utils/formatBalance';
-
 import DepositModal from './DepositModal';
 import WithdrawModal from './WithdrawModal';
 import useBombFinance from '../../../hooks/useBombFinance';

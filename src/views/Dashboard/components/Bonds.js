@@ -1,49 +1,7 @@
 import React, { useMemo } from 'react';
-import { useWallet } from 'use-wallet';
-import moment from 'moment';
 import styled from 'styled-components';
-import metamaskLogo from '../../../assets/img/metamask-fox.svg';
-import bombLogo from '../../../assets/img/bomb.png';
-import bsharesLogo from '../../../assets/img/bshares.png';
-import bbondLogo from '../../../assets/img/bbond.png';
-import bombbitcoinLogo from '../../../assets/img/bomb-bitcoin-LP.png';
-import bsharebnbLogo from '../../../assets/img/bshare-bnb-LP.png';
-import discordLogo from '../../../assets/img/pw4945914.png';
-import docsLogo from '../../../assets/img/ww2991106.png';
-import bshares from '../../../assets/img/bshares.png';
-import bomb from '../../../assets/img/bomb.png';
 import bbond from '../../../assets/img/bbond.png';
-import { makeStyles } from '@material-ui/core/styles';
-
-import { Box, Card, CardContent, Button, Typography, Grid } from '@material-ui/core';
-
-import { Alert } from '@material-ui/lab';
-import useRedeemOnBoardroom from '../../../hooks/useRedeemOnBoardroom';
-import useStakedBalanceOnBoardroom from '../../../hooks/useStakedBalanceOnBoardroom';
-import { getDisplayBalance } from '../../../utils/formatBalance';
-import useCurrentEpoch from '../../../hooks/useCurrentEpoch';
-import useFetchBoardroomAPR from '../../../hooks/useFetchBoardroomAPR';
-
-import useCashPriceInEstimatedTWAP from '..//../../hooks/useCashPriceInEstimatedTWAP';
-import useTreasuryAllocationTimes from '../../../hooks/useTreasuryAllocationTimes';
-import useTotalStakedOnBoardroom from '../../../hooks/useTotalStakedOnBoardroom';
-import useClaimRewardCheck from '../../../hooks/boardroom/useClaimRewardCheck';
-import useWithdrawCheck from '../../../hooks/boardroom/useWithdrawCheck';
-import ProgressCountdown from './ProgressCountdown';
-import { createGlobalStyle } from 'styled-components';
-import { Helmet } from 'react-helmet';
-
-import HomeImage from '../../../assets/img/background.jpg';
-const TITLE = 'bomb.money | Dashboard';
-
-const useStyles = makeStyles((theme) => ({
-    gridItem: {
-        height: '100%',
-        [theme.breakpoints.up('md')]: {
-            height: '85%',
-        },
-    },
-}));
+import {Typography, Grid } from '@material-ui/core';
 const Line = ({ color }) => (
     <hr
         style={{
@@ -198,25 +156,6 @@ const Bombs = () => {
         </StyledCardWrapper>
     );
 };
-
-const StyledBoardroom = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
-
-const StyledCardsWrapper = styled.div`
-  display: flex;
-  width: 600px;
-  @media (max-width: 768px) {
-    width: 100%;
-    flex-flow: column nowrap;
-    align-items: center;
-  }
-`;
 
 const StyledCardWrapper = styled.div`
 background: rgba(32, 37, 67, 0.5);

@@ -8,7 +8,7 @@ import HomeImage from '../../assets/img/background.jpg';
 import SummaryCard from './components/SummaryCard';
 import BoardroomanAndNews from './components/BoardroomAndNews';
 import Farms from './components/Farms';
-import Bombs from './components/Bombs';
+import Bombs from './components/Bonds';
 const BackgroundImage = createGlobalStyle`
   body {
     background: url(${HomeImage}) repeat !important;
