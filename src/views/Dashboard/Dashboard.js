@@ -8,6 +8,7 @@ import HomeImage from '../../assets/img/background.jpg';
 import SummaryCard from './components/SummaryCard';
 import BoardroomanAndNews from './components/BoardroomAndNews';
 import Farms from './components/Farms';
+import Bombs from './components/Bombs';
 const BackgroundImage = createGlobalStyle`
   body {
     background: url(${HomeImage}) repeat !important;
@@ -32,6 +33,7 @@ const Farm = () => {
             <SummaryCard></SummaryCard>
             <BoardroomanAndNews></BoardroomanAndNews>
             <Farms></Farms>
+            <Bombs></Bombs>
           </Container>
         </Route>
       </Page>

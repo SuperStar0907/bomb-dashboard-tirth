@@ -272,7 +272,7 @@ const Farms = () => {
                             backgroundColor: "#FFFFFF",
                             Top: '0%',
                             width: "98%",
-                            marginRight: "10px",
+                            marginRight: "11px",
                             "border":"0.5px solid #00ADE8",
                         }}
                     />
