@@ -7,6 +7,7 @@ import { Helmet } from 'react-helmet';
 import HomeImage from '../../assets/img/background.jpg';
 import SummaryCard from './components/SummaryCard';
 import BoardroomanAndNews from './components/BoardroomAndNews';
+import Farms from './components/Farms';
 const BackgroundImage = createGlobalStyle`
   body {
     background: url(${HomeImage}) repeat !important;
@@ -30,6 +31,7 @@ const Farm = () => {
           <Container maxWidth="lg">
             <SummaryCard></SummaryCard>
             <BoardroomanAndNews></BoardroomanAndNews>
+            <Farms></Farms>
           </Container>
         </Route>
       </Page>

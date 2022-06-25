@@ -57,6 +57,7 @@ const BoardroomAndNews = () => {
 
     return (
         <>
+        <div style={{marginBottom: "10px",paddingBottom:"5px"}}>
             <Helmet>
                 <title>{TITLE}</title>
             </Helmet>
@@ -331,9 +332,8 @@ const BoardroomAndNews = () => {
                         </Typography>
                     </StyledCardWrapper >
                 </Grid>
-
             </Grid>
-
+            </div>
         </>
     );
 };
