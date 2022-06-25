@@ -65,7 +65,6 @@ const Line = ({ color }) => (
         }}
     />
 );
-
 const BoardroomAndNews = () => {
     const { account } = useWallet();
     const bombFinance = useBombFinance();
@@ -125,7 +124,7 @@ const BoardroomAndNews = () => {
                     <title>{TITLE}</title>
                 </Helmet>
                 <Grid container spacing={0}>
-                    <Grid item xs={12} md={7}>
+                    <Grid item xs={12} md={7} style={{cursor:"pointer"}}>
                         <Typography style={{
                             fontFamily: 'Nunito',
                             fontWeight: 600,
@@ -133,40 +132,44 @@ const BoardroomAndNews = () => {
                             color: "#9EE6FF",
                             marginRight: "20px",
                         }} color="#9EE6FF" align="right">
-                            <a style={{ textDecorationLine: "Underline", color: "#9EE6FF", }} href="#">Read Investment Strategy</a> <a>&gt;</a>
+                            <a style={{ textDecorationLine: "Underline", color: "#9EE6FF"}}rel="noreferrer noopener" target="_blank" href="https://docs.bomb.money/welcome-start-here/readme">Read Investment Strategy</a> <a>&gt;</a>
                         </Typography>
                         <div style={{
                             "background": "radial-gradient(59345.13% 4094144349.28% at 39511.5% -2722397851.45%, rgba(0, 245, 171, 0.5) 0%, rgba(0, 173, 232, 0.5) 100%) ",
                             "border": "0.5px solid #E41A1A",
                             "marginRight": "20px",
-                            "marginTop": "5px"
-                        }}>
-                            <Typography style={{
+                            "marginTop": "5px",cursor:"pointer",
+                            textAlign: "center"
+                        }} >
+                            <a style={{
                                 fontFamily: 'Nunito',
                                 fontWeight: 800,
                                 fontSize: '24px',
                                 color: "#FFFFFF",
-                            }} color="#FFFFFF" align="center">
+                                textDecorationLine: "none",
+                            }} color="#FFFFFF"  href="https://bombbtc.com/" rel="noreferrer noopener" target="_blank">
                                 Invest Now
-                            </Typography>
+                            </a>
                         </div>
                         <Grid container spacing={0}>
-                            <Grid item xs={6} md={6}>
+                            <Grid item xs={6} md={6} style={{cursor:"pointer"}}>
                                 <div style={{
                                     "background": "rgba(255, 255, 255, 0.5)",
                                     "border": "1px solid #728CDF",
                                     "backdropFilter": "blur(25px)",
                                     "marginRight": "20px",
-                                    "marginTop": "5px"
+                                    "marginTop": "5px",
+                                    textAlign: "center"
                                 }}>
-                                    <Typography style={{
+                                    <a style={{
                                         fontFamily: 'Nunito',
                                         fontWeight: 700,
                                         fontSize: '18px',
                                         color: "#000000",
-                                    }} color="#000000" align="center">
+                                        textDecorationLine: "none",
+                                    }} color="#000000" align="center" href="https://discord.com/invite/94Aa4wSz3e" rel="noreferrer noopener" target="_blank">
                                         <div style={{ "display": "flex", "justifyContent": "center", "alignItems": "center", }}><img src={discordLogo} style={{ "height": "27" }} />Chat on Discord</div>
-                                    </Typography>
+                                    </a>
                                 </div>
                             </Grid>
                             <Grid item xs={6} md={6}>
@@ -176,15 +179,17 @@ const BoardroomAndNews = () => {
                                     "backdropFilter": "blur(25px)",
                                     "marginRight": "20px",
                                     "marginTop": "5px"
-                                }}>
-                                    <Typography style={{
+                                    
+                                }} >
+                                    <a style={{
                                         fontFamily: 'Nunito',
                                         fontWeight: 700,
                                         fontSize: '18px',
                                         color: "#000000",
-                                    }} color="#000000" align="center">
+                                        textDecorationLine: "none",
+                                    }} color="#000000" align="center" href="https://docs.bomb.money/welcome-start-here/readme" rel="noreferrer noopener" target="_blank">
                                         <div style={{ "display": "flex", "justifyContent": "center", "alignItems": "center" }}><img src={docsLogo} style={{ "height": "27" }} />Read Docs</div>
-                                    </Typography>
+                                    </a>
                                 </div>
                             </Grid>
                         </Grid>
