@@ -1,7 +1,15 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 import bbond from '../../../assets/img/bbond.png';
-import {Typography, Grid } from '@material-ui/core';
+import { Typography, Grid } from '@material-ui/core';
+import useBondStats from '../../../hooks/useBondStats';
+import useBombFinance from '../../../hooks/useBombFinance';
+import useCashPriceInLastTWAP from '../../../hooks/useCashPriceInLastTWAP';
+import { useTransactionAdder } from '../../../state/transactions/hooks';
+import useTokenBalance from '../../../hooks/useTokenBalance';
+import useBondsPurchasable from '../../../hooks/useBondsPurchasable';
+import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../../bomb-finance/constants';
+import { getDisplayBalance } from '../../../utils/formatBalance';
 const Line = ({ color }) => (
     <hr
         style={{
@@ -13,6 +21,39 @@ const Line = ({ color }) => (
     />
 );
 const Bombs = () => {
+    const bombFinance = useBombFinance();
+    const addTransaction = useTransactionAdder();
+    const bondStat = useBondStats();
+    //const bombStat = useBombStats();
+    const cashPrice = useCashPriceInLastTWAP();
+
+    const bondsPurchasable = useBondsPurchasable();
+
+    const bondBalance = useTokenBalance(bombFinance?.BBOND);
+    //const scalingFactor = useMemo(() => (cashPrice ? Number(cashPrice) : null), [cashPrice]);
+
+    const handleBuyBonds = useCallback(
+        async (amount) => {
+            const tx = await bombFinance.buyBonds(amount);
+            addTransaction(tx, {
+                summary: `Buy ${Number(amount).toFixed(2)} BBOND with ${amount} BOMB`,
+            });
+        },
+        [bombFinance, addTransaction],
+    );
+
+    const handleRedeemBonds = useCallback(
+        async (amount) => {
+            const tx = await bombFinance.redeemBonds(amount);
+            addTransaction(tx, { summary: `Redeem ${amount} BBOND` });
+        },
+        [bombFinance, addTransaction],
+    );
+    const isBondRedeemable = useMemo(() => cashPrice.gt(BOND_REDEEM_PRICE_BN), [cashPrice]);
+    const isBondPurchasable = useMemo(() => Number(bondStat?.tokenInFtm) < 1.01, [bondStat]);
+    const isBondPayingPremium = useMemo(() => Number(bondStat?.tokenInFtm) >= 1.1, [bondStat]);
+    // console.log("bondstat", Number(bondStat?.tokenInFtm))
+    const bondScale = (Number(cashPrice) / 100000000000000).toFixed(4);
     return (
         <StyledCardWrapper style={{
             marginTop: "10px",
@@ -40,7 +81,7 @@ const Bombs = () => {
                 BBOND can be purchased only on contraction periods, when TWAP of BOMB is below 1
             </Typography>
             <Grid container spacing={3}>
-                <Grid item xs={4} md={4} align="center" style={{ marginLeft: "20px",marginTop:"20px" }}>
+                <Grid item xs={4} md={4} align="center" style={{ marginLeft: "20px", marginTop: "20px" }}>
                     <Typography style={{
                         fontFamily: 'Nunito',
                         fontWeight: 300,
@@ -55,10 +96,10 @@ const Bombs = () => {
                         fontSize: '22px',
                         color: "#FFFFFF",
                     }} color="#FFFFFF" align="left">
-                        BBOND = 6.2872 BTCB
+                        BBOND = {Number(bondStat?.tokenInFtm).toFixed(4) || '-'} BTCB
                     </Typography>
                 </Grid>
-                <Grid item xs={3} md={3} style={{marginTop:"10px" }}>
+                <Grid item xs={3} md={3} style={{ marginTop: "10px" }}>
                     <Typography style={{
                         fontFamily: 'Nunito',
                         fontWeight: 300,
@@ -74,7 +115,7 @@ const Bombs = () => {
                         fontSize: '36px',
                         color: "#FFFFFF",
                     }} color="#FFFFFF" align="left">
-                        456
+                        {getDisplayBalance(bondBalance)}
                     </a>
                 </Grid>
                 <Grid item xs={4} md={4} >
@@ -94,33 +135,61 @@ const Bombs = () => {
                                 fontSize: '16px',
                                 color: "#FFFFFF",
                             }} color="#FFFFFF" align="left">
-                                Bomb is over peg
+                                {isBondPayingPremium === false ?
+                                    ("Bomb is over peg") : ({})}
                             </Typography>
                         </Grid>
                         <Grid item xs={6} md={6}>
-                            <div style={{ "background": "rgba(35, 40, 75, 0.75)", "border": "1px solid rgba(255, 255, 255, 0.5)", "backdropFilter": "blur(10px)", "borderRadius": "10px", width: "50%",float:"right",marginTop:"15px"}}>
-                                <a style={{
-                                    fontFamily: 'Nunito',
-                                    fontWeight: 400,
-                                    fontSize: '15px',
-                                    color: "rgba(255, 255, 255, 0.5)",
-                                    marginLeft: "5px",
-                                }} color="rgba(255, 255, 255, 0.5)" align="left">
-                                    Purchase
-                                </a><a style={{
-                                    backgroundColor: "rgba(255, 255, 255, 0.5)",
-                                    width: "20px",
-                                    height: "20px",
-                                    borderRadius: "50%",
-                                    textAlign: "center",
-                                    float: "right",
-                                    color: "#149EE3"
-                                }} align="right">&uarr;</a></div>
+                            <div style={{ "background": "rgba(35, 40, 75, 0.75)", "border": "1px solid rgba(255, 255, 255, 0.5)", "backdropFilter": "blur(10px)", "borderRadius": "10px", width: "50%", float: "right", marginTop: "15px" }}>
+                                {isBondPayingPremium === false ?
+                                    (
+                                        <>
+                                            <a style={{
+                                                fontFamily: 'Nunito',
+                                                fontWeight: 400,
+                                                fontSize: '15px',
+                                                color: "rgba(255, 255, 255, 0.5)",
+                                                marginLeft: "5px",
+                                            }} color="rgba(255, 255, 255, 0.5)" align="left">
+                                                Purchase
+                                            </a><a style={{
+                                                backgroundColor: "rgba(255, 255, 255, 0.5)",
+                                                width: "20px",
+                                                height: "20px",
+                                                borderRadius: "50%",
+                                                textAlign: "center",
+                                                float: "right",
+                                                color: "#149EE3"
+                                            }} align="right">&uarr;
+                                            </a>
+                                        </>)
+                                    : (<div style={{cursor:"pointer"}} onClick={handleBuyBonds}>
+                                        <a style={{
+                                            fontFamily: 'Nunito',
+                                            fontWeight: 400,
+                                            fontSize: '15px',
+                                            color: "rgba(255, 255, 255, 1)",
+                                            marginLeft: "5px",
+                                        }} color="rgba(255, 255, 255, 1)" align="left">
+                                            Purchase
+                                        </a><a style={{
+                                            backgroundColor: "rgba(255, 255, 255, 1)",
+                                            width: "20px",
+                                            height: "20px",
+                                            borderRadius: "50%",
+                                            textAlign: "center",
+                                            float: "right",
+                                            color: "#149EE3"
+                                        }} align="right">&uarr;
+                                        </a>
+                                    </div>)
+                                }
+                            </div>
                         </Grid>
-                                <hr
-                                style={{"border":"0.5px solid rgba(195, 197, 203, 0.75)", "width":"100%"}}
-                                />
-                         <Grid item xs={6} md={6}>
+                        <hr
+                            style={{ "border": "0.5px solid rgba(195, 197, 203, 0.5)", "width": "100%" }}
+                        />
+                        <Grid item xs={6} md={6}>
                             <Typography style={{
                                 fontFamily: 'Nunito',
                                 fontWeight: 600,
@@ -131,24 +200,50 @@ const Bombs = () => {
                             </Typography>
                         </Grid>
                         <Grid item xs={6} md={6}>
-                        <div style={{ "background": "rgba(35, 40, 75, 0.75)", "border": "1px solid rgba(255, 255, 255, 1)", "backdropFilter": "blur(10px)", "borderRadius": "10px", width: "50%",float:"right"}}>
+                            <div style={{ "background": "rgba(35, 40, 75, 0.75)", "border": "1px solid rgba(255, 255, 255, 0.5)", "backdropFilter": "blur(10px)", "borderRadius": "10px", width: "50%", float: "right"}}>
+                                {!bondStat || bondBalance.eq(0) || !isBondRedeemable ?(
+                                    <>
                                 <a style={{
                                     fontFamily: 'Nunito',
                                     fontWeight: 400,
                                     fontSize: '15px',
-                                    color: "rgba(255, 255, 255, 1)",
+                                    color: "rgba(255, 255, 255, 0.5)",
                                     marginLeft: "5px",
                                 }} color="rgba(255, 255, 255, 0.5)" align="left">
                                     Redeem
                                 </a><a style={{
-                                    backgroundColor: "rgba(255, 255, 255, 1)",
+                                    backgroundColor: "rgba(255, 255, 255, 0.5)",
                                     width: "20px",
                                     height: "20px",
                                     borderRadius: "50%",
                                     textAlign: "center",
                                     float: "right",
                                     color: "#149EE3"
-                                }} align="right">&darr;</a></div>
+                                }} align="right">&darr;</a>
+                                </>
+                                ):(<div style={{cursor:"pointer" }} onClick={handleRedeemBonds}>
+                                    <a style={{
+                                        fontFamily: 'Nunito',
+                                        fontWeight: 400,
+                                        fontSize: '15px',
+                                        color: "rgba(255, 255, 255, 1)",
+                                        marginLeft: "5px",
+                                    }} color="rgba(255, 255, 255, 1)" align="left">
+                                        Redeem
+                                    </a><a style={{
+                                        backgroundColor: "rgba(255, 255, 255, 1)",
+                                        width: "20px",
+                                        height: "20px",
+                                        borderRadius: "50%",
+                                        textAlign: "center",
+                                        float: "right",
+                                        color: "#149EE3"
+                                    }} align="right">&darr;</a>
+                                    </div>)}
+                                
+                                
+                                
+                                </div>
                         </Grid>
                     </Grid>
                 </Grid>
