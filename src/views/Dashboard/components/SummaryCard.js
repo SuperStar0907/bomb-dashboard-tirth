@@ -32,6 +32,8 @@ import useTotalValueLocked from '../../../hooks/useTotalValueLocked';
 import useBombFinance from '../../../hooks/useBombFinance';
 import { roundAndFormatNumber } from '../../../0x';
 import { Helmet } from 'react-helmet';
+import useBanks from '../../../hooks/useBanks';
+import TokenSymbol from '../../../components/TokenSymbol';
 const TITLE = 'bomb.money | Dashboard';
 const useStyles = makeStyles((theme) => ({
   gridItem: {
@@ -53,12 +55,17 @@ const Line = ({ color }) => (
 );
 
 const SummaryCard = () => {
+  const [banks] = useBanks();
+    const activeBanks = banks.filter((bank) => !bank.finished);
   const classes = useStyles();
   const { account } = useWallet();
+  console.log('account', account);
   const { onRedeem } = useRedeemOnBoardroom();
   const stakedBalance = useStakedBalanceOnBoardroom();
+  console.log('stakedBalance', stakedBalance);
   const currentEpoch = useCurrentEpoch();
   const cashStat = useCashPriceInEstimatedTWAP();
+  console.log('cashStat', cashStat);
   const totalStaked = useTotalStakedOnBoardroom();
   const boardroomAPR = useFetchBoardroomAPR();
   const canClaimReward = useClaimRewardCheck();
@@ -246,7 +253,7 @@ const SummaryCard = () => {
             </Grid>
             <Grid item xs={1} sm={1} md={1}><img src={metamaskLogo} alt="Metamask logo" style={{ height: 32 }} onClick={() => {
               bombFinance.watchAssetInMetamask('BSHARE');
-            }}/></Grid>
+            }} /></Grid>
           </Grid>
           <Line color="#f5f5f5" />
           <Grid container spacing={3}>
@@ -294,7 +301,7 @@ const SummaryCard = () => {
                 {tBondPriceInBNB ? tBondPriceInBNB : '-.----'} BNB
               </Typography>
             </Grid>
-            <Grid item xs={1} sm={1} md={1}><img src={metamaskLogo} alt="Metamask logo" style={{ height: 32 }}onClick={() => {
+            <Grid item xs={1} sm={1} md={1}><img src={metamaskLogo} alt="Metamask logo" style={{ height: 32 }} onClick={() => {
               bombFinance.watchAssetInMetamask('BBOND');
             }} /></Grid>
           </Grid>
@@ -396,7 +403,7 @@ const SummaryCard = () => {
                     fontSize: 18,
                     color: '#fff',
                   }} align="center">
-                    $10,451
+                    {Number(stakedBalance)}
                   </Typography>
                   <Typography style={{
                     fontFamily: 'Nunito',
@@ -404,23 +411,27 @@ const SummaryCard = () => {
                     fontSize: 18,
                     color: '#5DFDB0',
                   }} align="center">
-                    +22%
+                    +{Number(stakedBalance)}%
                   </Typography>
                 </div>
               </div>
             </div>
           </div>
-          <div style={{ "marginLeft": "10%", "marginTop": "5%" }}>
-            <Grid container spacing={0}>
-              <Grid item xs={6} sm={6} md={6}>
-                <img src={bombLogo} alt="Bomb logo" style={{ height: 14 }} /><t />
+          <Grid container spacing={2}>
+          {activeBanks
+          .filter(bank => bank.sectionInUI !== 3)
+            .map((bank) => (
+              // <p>{bank.depositTokenName}</p>
+              <React.Fragment key={bank.name}>
+                <Grid item xs={6} sm={6} md={6}>
+                <TokenSymbol symbol={bank.earnToken.symbol} size="12"/>
                 <a style={{
                   fontFamily: 'Nunito',
                   fontWeight: 300,
                   fontSize: 12,
                   paddingTop: '10px',
                   color: '#fff',
-                }}>&nbsp;&nbsp;Bomb:</a>
+                }}>&nbsp;&nbsp;{bank.depositTokenName}:</a>
                 <a style={{
                   fontFamily: 'Nunito',
                   fontWeight: 600,
@@ -429,107 +440,9 @@ const SummaryCard = () => {
                   color: '#fff',
                 }}> 17%</a>
               </Grid>
-              <Grid item xs={6} sm={6} md={6}>
-                <img src={bombbitcoinLogo} alt="Bomb Bitcoin logo" style={{ height: 14 }} /><t />
-                <a style={{
-                  fontFamily: 'Nunito',
-                  fontWeight: 300,
-                  fontSize: 12,
-                  paddingTop: '10px',
-                  color: '#fff',
-                }}>&nbsp;&nbsp;Bomb-BTCB:</a>
-                <a style={{
-                  fontFamily: 'Nunito',
-                  fontWeight: 600,
-                  fontSize: 14,
-                  paddingTop: '10px',
-                  color: '#fff',
-                }}> 17%</a>
-              </Grid>
-              <Grid item xs={6} sm={6} md={6}>
-                <img src={bsharesLogo} alt="BShares logo" style={{ height: 14 }} /><t />
-                <a style={{
-                  fontFamily: 'Nunito',
-                  fontWeight: 300,
-                  fontSize: 12,
-                  paddingTop: '10px',
-                  color: '#fff',
-                }}>&nbsp;&nbsp;BShare:</a>
-                <a style={{
-                  fontFamily: 'Nunito',
-                  fontWeight: 600,
-                  fontSize: 14,
-                  paddingTop: '10px',
-                  color: '#fff',
-                }}> 17%</a>
-              </Grid>
-              <Grid item xs={6} sm={6} md={6}>
-                <img src={bsharebnbLogo} alt="BShares BNB logo" style={{ height: 14 }} /><t />
-                <a style={{
-                  fontFamily: 'Nunito',
-                  fontWeight: 300,
-                  fontSize: 12,
-                  paddingTop: '10px',
-                  color: '#fff',
-                }}>&nbsp;&nbsp;Bshare-BNB:</a>
-                <a style={{
-                  fontFamily: 'Nunito',
-                  fontWeight: 600,
-                  fontSize: 14,
-                  paddingTop: '10px',
-                  color: '#fff',
-                }}> 17%</a>
-              </Grid>
-              <Grid item xs={6} sm={6} md={6}>
-                <img src={bbondLogo} alt="Bbond logo" style={{ height: 14 }} /><t />
-                <a style={{
-                  fontFamily: 'Nunito',
-                  fontWeight: 300,
-                  fontSize: 12,
-                  paddingTop: '10px',
-                  color: '#fff',
-                }}>&nbsp;&nbsp;BBond:</a>
-                <a style={{
-                  fontFamily: 'Nunito',
-                  fontWeight: 600,
-                  fontSize: 14,
-                  paddingTop: '10px',
-                  color: '#fff',
-                }}>12%</a>
-              </Grid>
-              <Grid item xs={6} sm={6} md={6}>
-                <Grid container spacing={0}>
-                  <Grid item xs={1} sm={1} md={1}>
-                    <div style={{
-                      "marginTop": "5px",
-                      "width": "14px",
-                      "height": "14px",
-                      "borderRadius": "50%",
-                      "backgroundSize": "100% 100%",
-                      "backgroundRepeat": "no-repeat",
-                      "backgroundImage": "linear-gradient(rgba(55, 55, 71, 1), rgba(55, 55, 71, 1))"
-                    }}></div>
-                  </Grid>
-                  <Grid item xs={11} sm={11} md={11}>
-                    <a style={{
-                      fontFamily: 'Nunito',
-                      fontWeight: 300,
-                      fontSize: 12,
-                      paddingTop: '10px',
-                      color: '#fff',
-                    }}>&nbsp;&nbsp;Others:</a>
-                    <a style={{
-                      fontFamily: 'Nunito',
-                      fontWeight: 600,
-                      fontSize: 14,
-                      paddingTop: '10px',
-                      color: '#fff',
-                    }}> 17%</a>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Grid>
-          </div>
+              </React.Fragment>
+            ))}
+          </Grid>
         </Grid>
         <Grid item xs={0} sm={0} md={1} className={classes.gridItem} align="center"></Grid>
       </Grid>
@@ -547,4 +460,3 @@ border-radius: 5px;
 `;
 
 export default SummaryCard;
-
